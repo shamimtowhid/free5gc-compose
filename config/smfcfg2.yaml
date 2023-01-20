@@ -21,6 +21,9 @@ configuration:
         sst: 1 # Slice/Service Type (uinteger, range: 0~255)
         sd: 112233 # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)
       dnnInfos: # DNN information list
+        - dnn: internet # Data Network Name
+          dns: # the IP address of DNS
+            ipv4: 8.8.8.8
         - dnn: internet2 # Data Network Name
           dns: # the IP address of DNS
             ipv4: 8.8.8.8
@@ -32,7 +35,7 @@ configuration:
     addr: smf2.free5gc.org
   userplaneInformation: # list of userplane information
     upNodes: # information of userplane node (AN or UPF)
-      gNB: # the name of the node
+      gNB2: # the name of the node
         type: AN # the type of the node (AN or UPF)
       UPF2:  # the name of the node
         type: UPF # the type of the node (AN or UPF)
@@ -42,6 +45,9 @@ configuration:
               sst: 1 # Slice/Service Type (uinteger, range: 0~255)
               sd: 112233 # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)
             dnnUpfInfoList: # DNN information list for this S-NSSAI
+              - dnn: internet
+                pools:
+                  - cidr: 10.60.0.0/16
               - dnn: internet2
                 pools:
                   - cidr: 10.61.0.0/16
@@ -49,12 +55,16 @@ configuration:
           - interfaceType: N3 # the type of the interface (N3 or N9)
             endpoints: # the IP address of this N3/N9 interface on this UPF
               - upf2.free5gc.org
+            networkInstance: internet # Data Network Name (DNN)
+          - interfaceType: N3 # the type of the interface (N3 or N9)
+            endpoints: # the IP address of this N3/N9 interface on this UPF
+              - upf2.free5gc.org
             networkInstance: internet2 # Data Network Name (DNN)
     links: # the topology graph of userplane, A and B represent the two nodes of each link
-      - A: gNB
+      - A: gNB2
         B: UPF2
   nrfUri: http://nrf.free5gc.org:8000 # a valid URI of NRF
-
+  ulcl: false
 # the kind of log output
 # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
 # ReportCaller: enable the caller report or not, value: true or false

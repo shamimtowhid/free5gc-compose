@@ -58,8 +58,8 @@ configured-nssai:
 
 # Default Configured NSSAI for this UE
 default-nssai:
-  - sst: 1
-    sd: 1
+  - sst: 0x01
+    sd: 0x10203
 
 # Supported integrity algorithms by this UE
 integrity:

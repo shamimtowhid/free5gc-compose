@@ -1,6 +1,15 @@
 version: '3.3'
 
 services:
+  server:
+    image: nginx
+    ports:
+      - "8081:80"
+    networks:
+      privnet:
+        aliases:
+          - server1.org
+
   free5gc-upf:
     container_name: upf
     build:
@@ -291,7 +300,6 @@ services:
     volumes:
       - ./config/gnbcfg.yaml:/ueransim/config/gnbcfg.yaml
       - ./config/uecfg.yaml:/ueransim/config/uecfg.yaml
-      - ./config/uecfg2.yaml:/ueransim/config/uecfg2.yaml
     cap_add:
       - NET_ADMIN
     devices:
@@ -300,6 +308,27 @@ services:
       privnet:
         aliases:
           - gnb.free5gc.org
+    depends_on:
+      - free5gc-amf
+      - free5gc-upf
+      - free5gc-upf2
+
+  ueransim2:
+    container_name: ueransim2
+    build:
+      context: ./ueransim
+    command: ./nr-gnb -c ./config/gnbcfg.yaml
+    volumes:
+      - ./config/gnbcfg2.yaml:/ueransim/config/gnbcfg.yaml
+      - ./config/uecfg2.yaml:/ueransim/config/uecfg.yaml
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - "/dev/net/tun"
+    networks:
+      privnet:
+        aliases:
+          - gnb2.free5gc.org
     depends_on:
       - free5gc-amf
       - free5gc-upf

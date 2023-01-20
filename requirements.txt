@@ -1,0 +1,4 @@
+docker==20.10.21
+docker-compose==1.25.0
+gtp5g==0.6.8
+free5gc==3.2.1
