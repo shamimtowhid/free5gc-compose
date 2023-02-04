@@ -22,7 +22,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Install runtime dependencies + ping
 RUN apt-get update \
     && apt-get install libsctp-dev lksctp-tools iproute2 iputils-ping -y \
-#    && apt update && apt -y install kali-linux-headless \
+    && apt update && apt -y install kali-linux-headless \
     && apt-get clean
 
 WORKDIR /ueransim
