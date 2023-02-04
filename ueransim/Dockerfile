@@ -14,13 +14,15 @@ RUN apt-get update \
     && cd ./UERANSIM \
     && make
 
-FROM bitnami/minideb:bullseye
+#FROM bitnami/minideb:bullseye
+FROM kalilinux/kali-rolling:latest
 
 ENV DEBIAN_FRONTEND noninteractive
 
 # Install runtime dependencies + ping
 RUN apt-get update \
     && apt-get install libsctp-dev lksctp-tools iproute2 iputils-ping -y \
+#    && apt update && apt -y install kali-linux-headless \
     && apt-get clean
 
 WORKDIR /ueransim
