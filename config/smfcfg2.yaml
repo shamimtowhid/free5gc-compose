@@ -21,10 +21,10 @@ configuration:
         sst: 1 # Slice/Service Type (uinteger, range: 0~255)
         sd: 112233 # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)
       dnnInfos: # DNN information list
-        - dnn: internet # Data Network Name
-          dns: # the IP address of DNS
-            ipv4: 8.8.8.8
-        - dnn: internet2 # Data Network Name
+#        - dnn: internet # Data Network Name
+#          dns: # the IP address of DNS
+#            ipv4: 8.8.8.8
+        - dnn: data_network_1 # Data Network Name
           dns: # the IP address of DNS
             ipv4: 8.8.8.8
   plmnList: # the list of PLMN IDs that this SMF belongs to (optional, remove this key when unnecessary)
@@ -45,21 +45,21 @@ configuration:
               sst: 1 # Slice/Service Type (uinteger, range: 0~255)
               sd: 112233 # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)
             dnnUpfInfoList: # DNN information list for this S-NSSAI
-              - dnn: internet
-                pools:
-                  - cidr: 10.60.0.0/16
-              - dnn: internet2
+              - dnn: data_network_1
                 pools:
                   - cidr: 10.61.0.0/16
+#              - dnn: internet2
+#                pools:
+#                  - cidr: 10.61.0.0/16
         interfaces: # Interface list for this UPF
           - interfaceType: N3 # the type of the interface (N3 or N9)
             endpoints: # the IP address of this N3/N9 interface on this UPF
               - upf2.free5gc.org
-            networkInstance: internet # Data Network Name (DNN)
-          - interfaceType: N3 # the type of the interface (N3 or N9)
-            endpoints: # the IP address of this N3/N9 interface on this UPF
-              - upf2.free5gc.org
-            networkInstance: internet2 # Data Network Name (DNN)
+            networkInstance: data_network_1 # Data Network Name (DNN)
+#          - interfaceType: N3 # the type of the interface (N3 or N9)
+#            endpoints: # the IP address of this N3/N9 interface on this UPF
+#              - upf2.free5gc.org
+#            networkInstance: internet2 # Data Network Name (DNN)
     links: # the topology graph of userplane, A and B represent the two nodes of each link
       - A: gNB2
         B: UPF2

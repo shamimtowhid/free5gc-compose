@@ -1,14 +1,14 @@
 version: '3.3'
 
 services:
-  server:
-    image: nginx
-    ports:
-      - "8081:80"
-    networks:
-      privnet:
-        aliases:
-          - server1.org
+#  server:
+#    image: kali_ue:latest
+#    ports:
+#      - "8081:80"
+#    networks:
+#      privnet:
+#        aliases:
+#          - server1.org
 
   free5gc-upf:
     container_name: upf
@@ -299,7 +299,10 @@ services:
     command: ./nr-gnb -c ./config/gnbcfg.yaml
     volumes:
       - ./config/gnbcfg.yaml:/ueransim/config/gnbcfg.yaml
-      - ./config/uecfg.yaml:/ueransim/config/uecfg.yaml
+      - ./config/ue_cfg/ue1_cfg.yaml:/ueransim/config/ue1_cfg.yaml
+      - ./config/ue_cfg/ue3_cfg.yaml:/ueransim/config/ue3_cfg.yaml
+      - ./config/ue_cfg/ue5_cfg.yaml:/ueransim/config/ue5_cfg.yaml
+      - ./config/ue_cfg/ue7_cfg.yaml:/ueransim/config/ue7_cfg.yaml
     cap_add:
       - NET_ADMIN
     devices:
@@ -320,7 +323,10 @@ services:
     command: ./nr-gnb -c ./config/gnbcfg.yaml
     volumes:
       - ./config/gnbcfg2.yaml:/ueransim/config/gnbcfg.yaml
-      - ./config/uecfg2.yaml:/ueransim/config/uecfg.yaml
+      - ./config/ue_cfg/ue2_cfg.yaml:/ueransim/config/ue2_cfg.yaml
+      - ./config/ue_cfg/ue4_cfg.yaml:/ueransim/config/ue4_cfg.yaml
+      - ./config/ue_cfg/ue6_cfg.yaml:/ueransim/config/ue6_cfg.yaml
+      - ./config/ue_cfg/ue8_cfg.yaml:/ueransim/config/ue8_cfg.yaml
     cap_add:
       - NET_ADMIN
     devices:
