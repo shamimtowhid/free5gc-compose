@@ -299,10 +299,10 @@ services:
     command: ./nr-gnb -c ./config/gnbcfg.yaml
     volumes:
       - ./config/gnbcfg.yaml:/ueransim/config/gnbcfg.yaml
-      - ./config/ue_cfg/ue1_cfg.yaml:/ueransim/config/ue1_cfg.yaml
-      - ./config/ue_cfg/ue3_cfg.yaml:/ueransim/config/ue3_cfg.yaml
-      - ./config/ue_cfg/ue5_cfg.yaml:/ueransim/config/ue5_cfg.yaml
-      - ./config/ue_cfg/ue7_cfg.yaml:/ueransim/config/ue7_cfg.yaml
+#      - ./config/ue_cfg/ue1_cfg.yaml:/ueransim/config/ue1_cfg.yaml
+#      - ./config/ue_cfg/ue3_cfg.yaml:/ueransim/config/ue3_cfg.yaml
+#      - ./config/ue_cfg/ue5_cfg.yaml:/ueransim/config/ue5_cfg.yaml
+#      - ./config/ue_cfg/ue7_cfg.yaml:/ueransim/config/ue7_cfg.yaml
     cap_add:
       - NET_ADMIN
     devices:
@@ -316,6 +316,104 @@ services:
       - free5gc-upf
       - free5gc-upf2
 
+
+  ue1:
+    container_name: ue1
+    build:
+      context: ./ueransim
+    command: ./nr-ue -c ./config/ue1_cfg.yaml
+    volumes:
+#      - ./config/gnbcfg.yaml:/ueransim/config/gnbcfg.yaml
+      - ./config/ue_cfg/ue1_cfg.yaml:/ueransim/config/ue1_cfg.yaml
+#      - ./config/ue_cfg/ue3_cfg.yaml:/ueransim/config/ue3_cfg.yaml
+#      - ./config/ue_cfg/ue5_cfg.yaml:/ueransim/config/ue5_cfg.yaml
+#      - ./config/ue_cfg/ue7_cfg.yaml:/ueransim/config/ue7_cfg.yaml
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - "/dev/net/tun"
+    networks:
+      privnet:
+        aliases:
+          - ue1.free5gc.org
+    depends_on:
+      - ueransim
+      - free5gc-amf
+      - free5gc-upf
+
+  ue3:
+    container_name: ue3
+    build:
+      context: ./ueransim
+    command: ./nr-ue -c ./config/ue3_cfg.yaml
+    volumes:
+#      - ./config/gnbcfg.yaml:/ueransim/config/gnbcfg.yaml
+#      - ./config/ue_cfg/ue1_cfg.yaml:/ueransim/config/ue1_cfg.yaml
+      - ./config/ue_cfg/ue3_cfg.yaml:/ueransim/config/ue3_cfg.yaml
+#      - ./config/ue_cfg/ue5_cfg.yaml:/ueransim/config/ue5_cfg.yaml
+#      - ./config/ue_cfg/ue7_cfg.yaml:/ueransim/config/ue7_cfg.yaml
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - "/dev/net/tun"
+    networks:
+      privnet:
+        aliases:
+          - ue3.free5gc.org
+    depends_on:
+      - ueransim
+      - free5gc-amf
+      - free5gc-upf
+
+  ue5:
+    container_name: ue5
+    build:
+      context: ./ueransim
+    command: ./nr-ue -c ./config/ue5_cfg.yaml
+    volumes:
+#      - ./config/gnbcfg.yaml:/ueransim/config/gnbcfg.yaml
+#      - ./config/ue_cfg/ue1_cfg.yaml:/ueransim/config/ue1_cfg.yaml
+#      - ./config/ue_cfg/ue3_cfg.yaml:/ueransim/config/ue3_cfg.yaml
+      - ./config/ue_cfg/ue5_cfg.yaml:/ueransim/config/ue5_cfg.yaml
+#      - ./config/ue_cfg/ue7_cfg.yaml:/ueransim/config/ue7_cfg.yaml
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - "/dev/net/tun"
+    networks:
+      privnet:
+        aliases:
+          - ue5.free5gc.org
+    depends_on:
+      - ueransim
+      - free5gc-amf
+      - free5gc-upf
+
+
+  ue7:
+    container_name: ue7
+    build:
+      context: ./ueransim
+    command: ./nr-ue -c ./config/ue7_cfg.yaml
+    volumes:
+#      - ./config/gnbcfg.yaml:/ueransim/config/gnbcfg.yaml
+#      - ./config/ue_cfg/ue1_cfg.yaml:/ueransim/config/ue1_cfg.yaml
+#      - ./config/ue_cfg/ue3_cfg.yaml:/ueransim/config/ue3_cfg.yaml
+#      - ./config/ue_cfg/ue5_cfg.yaml:/ueransim/config/ue5_cfg.yaml
+      - ./config/ue_cfg/ue7_cfg.yaml:/ueransim/config/ue7_cfg.yaml
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - "/dev/net/tun"
+    networks:
+      privnet:
+        aliases:
+          - ue7.free5gc.org
+    depends_on:
+      - ueransim
+      - free5gc-amf
+      - free5gc-upf
+
   ueransim2:
     container_name: ueransim2
     build:
@@ -323,10 +421,10 @@ services:
     command: ./nr-gnb -c ./config/gnbcfg.yaml
     volumes:
       - ./config/gnbcfg2.yaml:/ueransim/config/gnbcfg.yaml
-      - ./config/ue_cfg/ue2_cfg.yaml:/ueransim/config/ue2_cfg.yaml
-      - ./config/ue_cfg/ue4_cfg.yaml:/ueransim/config/ue4_cfg.yaml
-      - ./config/ue_cfg/ue6_cfg.yaml:/ueransim/config/ue6_cfg.yaml
-      - ./config/ue_cfg/ue8_cfg.yaml:/ueransim/config/ue8_cfg.yaml
+#      - ./config/ue_cfg/ue2_cfg.yaml:/ueransim/config/ue2_cfg.yaml
+#      - ./config/ue_cfg/ue4_cfg.yaml:/ueransim/config/ue4_cfg.yaml
+#      - ./config/ue_cfg/ue6_cfg.yaml:/ueransim/config/ue6_cfg.yaml
+#      - ./config/ue_cfg/ue8_cfg.yaml:/ueransim/config/ue8_cfg.yaml
     cap_add:
       - NET_ADMIN
     devices:
@@ -338,6 +436,106 @@ services:
     depends_on:
       - free5gc-amf
       - free5gc-upf
+      - free5gc-upf2
+
+
+  ue2:
+    container_name: ue2
+    build:
+      context: ./ueransim
+    command: ./nr-ue -c ./config/ue2_cfg.yaml
+    volumes:
+#      - ./config/gnbcfg2.yaml:/ueransim/config/gnbcfg.yaml
+      - ./config/ue_cfg/ue2_cfg.yaml:/ueransim/config/ue2_cfg.yaml
+#      - ./config/ue_cfg/ue4_cfg.yaml:/ueransim/config/ue4_cfg.yaml
+#      - ./config/ue_cfg/ue6_cfg.yaml:/ueransim/config/ue6_cfg.yaml
+#      - ./config/ue_cfg/ue8_cfg.yaml:/ueransim/config/ue8_cfg.yaml
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - "/dev/net/tun"
+    networks:
+      privnet:
+        aliases:
+          - ue2.free5gc.org
+    depends_on:
+      - ueransim2
+      - free5gc-amf
+      - free5gc-upf2
+
+
+  ue4:
+    container_name: ue4
+    build:
+      context: ./ueransim
+    command: ./nr-ue -c ./config/ue4_cfg.yaml
+    volumes:
+#      - ./config/gnbcfg2.yaml:/ueransim/config/gnbcfg.yaml
+#      - ./config/ue_cfg/ue2_cfg.yaml:/ueransim/config/ue2_cfg.yaml
+      - ./config/ue_cfg/ue4_cfg.yaml:/ueransim/config/ue4_cfg.yaml
+#      - ./config/ue_cfg/ue6_cfg.yaml:/ueransim/config/ue6_cfg.yaml
+#      - ./config/ue_cfg/ue8_cfg.yaml:/ueransim/config/ue8_cfg.yaml
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - "/dev/net/tun"
+    networks:
+      privnet:
+        aliases:
+          - ue4.free5gc.org
+    depends_on:
+      - ueransim2
+      - free5gc-amf
+      - free5gc-upf2
+
+
+  ue6:
+    container_name: ue6
+    build:
+      context: ./ueransim
+    command: ./nr-ue -c ./config/ue6_cfg.yaml
+    volumes:
+#      - ./config/gnbcfg2.yaml:/ueransim/config/gnbcfg.yaml
+#      - ./config/ue_cfg/ue2_cfg.yaml:/ueransim/config/ue2_cfg.yaml
+#      - ./config/ue_cfg/ue4_cfg.yaml:/ueransim/config/ue4_cfg.yaml
+      - ./config/ue_cfg/ue6_cfg.yaml:/ueransim/config/ue6_cfg.yaml
+#      - ./config/ue_cfg/ue8_cfg.yaml:/ueransim/config/ue8_cfg.yaml
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - "/dev/net/tun"
+    networks:
+      privnet:
+        aliases:
+          - ue6.free5gc.org
+    depends_on:
+      - ueransim2
+      - free5gc-amf
+      - free5gc-upf2
+
+
+  ue8:
+    container_name: ue8
+    build:
+      context: ./ueransim
+    command: ./nr-ue -c ./config/ue8_cfg.yaml
+    volumes:
+#      - ./config/gnbcfg2.yaml:/ueransim/config/gnbcfg.yaml
+#      - ./config/ue_cfg/ue2_cfg.yaml:/ueransim/config/ue2_cfg.yaml
+#      - ./config/ue_cfg/ue4_cfg.yaml:/ueransim/config/ue4_cfg.yaml
+#      - ./config/ue_cfg/ue6_cfg.yaml:/ueransim/config/ue6_cfg.yaml
+      - ./config/ue_cfg/ue8_cfg.yaml:/ueransim/config/ue8_cfg.yaml
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - "/dev/net/tun"
+    networks:
+      privnet:
+        aliases:
+          - ue8.free5gc.org
+    depends_on:
+      - ueransim2
+      - free5gc-amf
       - free5gc-upf2
 
 networks:

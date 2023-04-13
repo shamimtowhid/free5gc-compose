@@ -1,0 +1,63 @@
+to check whether gtp5g is running:
+
+lsmod | grep gtp
+
+If gtp is running then proceed with the testbed otherwise,
+
+cd gtp5g
+make clean && make
+sudo make install
+
+
+
+
+
+==============================================================================================
+To uninstall gtp5g:
+=============================================================================================
+cd gtp5g
+sudo make uninstall gtp5g
+
+
+
+
+
+================================================================================================
+For spoofing test
+===============================================================================================
+hping3 -1 google.com -a 10.61.0.1
+
+
+
+
+
+==================================================================================================
+Setting default ip route:
+==================================================================================================
+ip route (show the list of ip route)
+ip route delete <route_to_delete>
+ip route add <route_to_add>
+
+
+
+
+
+===================================================================================================
+Add UEs using webui:
+===================================================================================================
+The webui is running on localhost:5000
+username: admin
+password: free5gc
+Add subscribers according to the UE config files
+
+
+
+
+
+=====================================================================================================
+docker and docker-compose command:
+=====================================================================================================
+to start the core functions and UEs: sudo docker-compose up (specify -d to run in the background)
+to stop the core functions and UEs: sudo docker-compose down
+to login into a specific container: sudo docker exec -it <container_name> bash
+to install necessary tools inside container: apt-get install net-tools tcpdump vim hping3
