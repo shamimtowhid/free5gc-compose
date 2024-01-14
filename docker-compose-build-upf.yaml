@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  free5gc-upf:
+    container_name: upf
+    build:
+      context: ./nf_upf
+      args:
+        DEBUG_TOOLS: "false"
+    command: bash -c "./upf-iptables.sh && ./upf -c ./config/upfcfg.yaml"
+    volumes:
+      - ./config/upfcfg.yaml:/free5gc/config/upfcfg.yaml
+      - ./config/upf-iptables.sh:/free5gc/upf-iptables.sh
+      - ../data:/data
+    cap_add:
+      - NET_ADMIN
+    networks:
+      privnet:
+        aliases:
+          - upf.free5gc.org
+
+
+#  my_alpine_container:
+#    image: ubuntu:latest
+#    container_name: server
+#    command: /bin/bash
+#    volumes:
+#      - ../data:/data
+#    stdin_open: true
+#    tty: true
+#    cap_add:
+#      - NET_ADMIN
+#    networks:
+#      - my_network
+
+networks:
+  privnet:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.100.200.0/24
+    driver_opts:
+      com.docker.network.bridge.name: br-free5gc
+
+#  my_network:
+#    ipam:
+#      driver: default
+#      config:
+#        - subnet: 172.26.0.0/24
+

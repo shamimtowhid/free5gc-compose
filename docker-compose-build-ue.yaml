@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+
+  ueransim:
+    container_name: ueransim
+    build:
+      context: ./ueransim
+    command: ./nr-gnb -c ./config/gnbcfg.yaml
+    volumes:
+      - ./config/gnbcfg.yaml:/ueransim/config/gnbcfg.yaml
+      - ./config/uecfg.yaml:/ueransim/config/uecfg.yaml
+      - ../data:/data
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - "/dev/net/tun"
+    networks:
+      privnet:
+        aliases:
+          - gnb.free5gc.org
+
+#  my_alpine_container:
+#    image: ubuntu:latest
+#    container_name: server
+#    command: /bin/bash
+#    volumes:
+#      - ../data:/data
+#    stdin_open: true
+#    tty: true
+#    cap_add:
+#      - NET_ADMIN
+#    networks:
+#      - my_network
+
+networks:
+  privnet:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.100.200.0/24
+    driver_opts:
+      com.docker.network.bridge.name: br-free5gc
+
+#  my_network:
+#    ipam:
+#      driver: default
+#      config:
+#        - subnet: 172.26.0.0/24
+
